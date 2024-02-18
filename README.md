@@ -1,5 +1,5 @@
 
-# Cashrewards microservice template for .net 6.0
+#  microservice template for .net 6.0
 
 This is a .net template for backend micro-services (as of writing this document updated to .net 6).
 
