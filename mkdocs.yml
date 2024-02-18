@@ -1,0 +1,9 @@
+site_name: 'accountsSyncDataConsumer'
+
+plugins:
+  - techdocs-core
+
+nav:
+  - Other Stuff:
+    - More docs: 'other-stuff/more-docs.md'
+  - Overview: index.md

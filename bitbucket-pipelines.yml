@@ -1,0 +1,48 @@
+image:
+  name: 811583718322.dkr.ecr.ap-southeast-2.amazonaws.com/dotnet-sq:dotnet7
+  aws: 
+    access-key: $ECR_ACCESS_KEY
+    secret-key: $ECR_SECRET_KEY
+
+clone:
+  depth: 1
+
+definitions:
+  caches:
+    sonar: ~/.sonar/cache  # Caching SonarCloud artifacts will speed up your build
+  steps:
+    - step: &build-generate-swagger
+        name: Build and generate swagger yaml
+        caches:
+          - dotnetcore
+        script:
+          - apt-get update -y
+          - apt-get install -y git gawk
+          - dotnet tool restore
+          - dotnet restore accountsSyncDataConsumer.sln
+          - dotnet build -c Release accountsSyncDataConsumer.sln
+          - sh ./generate-and-push-swagger.sh
+    - step: &build-test-sonarcloud
+        name: Build, test and analyze on SonarCloud
+        caches:
+          - dotnetcore           # See https://confluence.atlassian.com/bitbucket/caching-dependencies-895552876.html
+        script:
+          - dotnet tool restore
+          - dotnet sonarscanner begin /k:"accountsSyncDataConsumer" /d:"sonar.login=${SONAR_TOKEN}" /o:"shopgodev" /v:"${BITBUCKET_COMMIT}" /d:"sonar.host.url=https://sonarcloud.io" /d:sonar.qualitygate.wait="true" /d:sonar.coverageReportPaths="./sonarqubecoverage/SonarQube.xml"
+          - dotnet restore accountsSyncDataConsumer.sln
+          - dotnet build accountsSyncDataConsumer.sln
+          - dotnet test --collect:"XPlat Code Coverage" accountsSyncDataConsumer.sln
+          - reportgenerator "-reports:tests/*/TestResults/*/coverage.cobertura.xml" "-targetdir:sonarqubecoverage" "-reporttypes:SonarQube"
+          - dotnet sonarscanner end /d:"sonar.login=${SONAR_TOKEN}"
+          - pipe: sonarsource/sonarqube-quality-gate:1.0.0
+            variables:
+              SONAR_TOKEN: ${SONAR_TOKEN}
+              REPORT_FILE: '.sonarqube/out/.sonar/report-task.txt'
+
+pipelines:
+  branches:
+    'master':
+      - step: *build-generate-swagger
+  pull-requests:
+    '**':
+      - step: *build-test-sonarcloud

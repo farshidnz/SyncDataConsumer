@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: accountsSyncDataConsumer
+  description: Syncing data from account API to ShopToGo DB
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: service
+  owner: devs@cashrewards.com
+  lifecycle: experimental
+  providesApis:
+    - accountsSyncDataConsumer-v1-api
+    - accountsSyncDataConsumer-v2-api

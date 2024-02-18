@@ -1,0 +1,137 @@
+[
+  {
+    "Key": "LOG_LEVEL",
+    "Values": [
+      {
+        "Scope": "*",
+        "Value": "debug"
+      },
+      {
+        "Scope": "prelive|live",
+        "Value": "error"
+      }
+    ]
+  },
+  {
+    "Key": "ScalingMinCapacity",
+    "Values": [
+      {
+        "Scope": "*",
+        "Value": 1
+      },
+      {
+        "Scope": "wearemc",
+        "Value": 0
+      },
+      {
+        "Scope": "live",
+        "Value": 2
+      }
+    ]
+  },
+  {
+    "Key": "ScalingMaxCapacity",
+    "Values": [
+      {
+        "Scope": "*",
+        "Value": 2
+      },
+      {
+        "Scope": "live",
+        "Value": 10
+      }
+    ]
+  },
+  {
+    "Key": "ScalingDesiredCount",
+    "Values": [
+      {
+        "Scope": "*",
+        "Value": 1
+      },
+      {
+        "Scope": "live",
+        "Value": 2
+      }
+    ]
+  },
+  {
+    "Key": "cpu",
+    "Values": [
+      {
+        "Scope": "*",
+        "Value": 512
+      },
+      {
+        "Scope": "prelive|live",
+        "Value": 1024
+      }
+    ]
+  },
+  {
+    "Key": "memoryLimitMiB",
+    "Values": [
+      {
+        "Scope": "*",
+        "Value": 1024
+      },
+      {
+        "Scope": "prelive|live",
+        "Value": 2048
+      }
+    ]
+  },
+  {
+    "Key": "ShopGoDBName",
+    "Values": [
+      {
+        "Scope": "*",
+        "Value": "ShopGo_Staging"
+      },
+      {
+        "Scope": "prelive|live",
+        "Value": "ShopGo"
+      }
+    ]
+  },
+  {
+    "Key": "ShopGoDBUser",
+    "Values": [
+        {
+            "Scope": "*",
+            "Value": "AppUsr"
+        },
+        {
+            "Scope": "prelive|live",
+            "Value": "service.membersettingsapi"
+        }
+    ]
+  },
+  {
+    "Key": "ShopGoDBPassword",
+    "Values": [
+        {
+            "Scope": "*",
+            "Value": "${Secret:ShopGoDBPassword}"
+        }
+    ]
+  },
+ {
+    "Key": "AzureAADClientId",
+    "Values": [
+      {
+        "Scope": "*",
+        "Value": "${Secret:AzureAADClientId}"
+      }
+    ]
+  },
+  {
+    "Key": "AzureAADClientSecret",
+    "Values": [
+      {
+        "Scope": "*",
+        "Value": "${Secret:AzureAADClientSecret}"
+      }
+    ]
+  }
+]

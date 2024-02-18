@@ -1,0 +1,47 @@
+openapi: 3.0.1
+info:
+  title: accountsSyncDataConsumer
+  version: '2'
+paths:
+  /v2/Person:
+    get:
+      tags:
+        - Person
+      parameters:
+        - name: personId
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/accountsSyncDataConsumer.Application.PersonApplication.Queries.GetPersonInfo.v2.PersonInfo'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/accountsSyncDataConsumer.Application.PersonApplication.Queries.GetPersonInfo.v2.PersonInfo'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/accountsSyncDataConsumer.Application.PersonApplication.Queries.GetPersonInfo.v2.PersonInfo'
+components:
+  schemas:
+    accountsSyncDataConsumer.Application.PersonApplication.Queries.GetPersonInfo.v2.PersonInfo:
+      type: object
+      properties:
+        description:
+          type: string
+          nullable: true
+        status:
+          type: string
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: 'Standard Authorization header using the Bearer scheme. Example: "bearer {token}"'
+      name: Authorization
+      in: header
+security:
+  - Bearer: [ ]

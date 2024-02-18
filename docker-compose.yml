@@ -1,0 +1,15 @@
+unit-test:
+  container_name: accountsSyncDataConsumer-unit-test
+  image: mcr.microsoft.com/dotnet/sdk:6.0
+  command: sh /app/run-unit-test.sh "${CURRENT_UID}"
+  working_dir: /app
+  volumes:
+  - ./:/app
+
+integration-test:
+  container_name: accountsSyncDataConsumer-integration-test
+  image: mcr.microsoft.com/dotnet/sdk:6.0
+  command: sh /app/run-integration-test.sh "${CURRENT_UID}"
+  working_dir: /app
+  volumes:
+  - ./:/app

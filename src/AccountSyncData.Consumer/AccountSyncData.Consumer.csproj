@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>11</LangVersion>
+        <EnablePreviewFeatures>true</EnablePreviewFeatures>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <TargetFramework>net7.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AspNetCore.HealthChecks.Aws.Sqs" Version="6.0.0" />
+      <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.2" />
+      <PackageReference Include="AutoMapper" Version="12.0.0" />
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+      <PackageReference Include="AWSSDK.KeyManagementService" Version="3.7.101.1" />
+      <PackageReference Include="Dapper" Version="2.0.123" />
+      <PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="2.2.0" />
+      <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
+      <PackageReference Include="Microsoft.Data.SqlClient.AlwaysEncrypted.AzureKeyVaultProvider" Version="1.2.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="7.0.1" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
+      <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="5.3.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+      <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+        <PackageReference Include="AWSSDK.SQS" Version="3.7.100.21" />
+    </ItemGroup>
+    <ItemGroup>
+        <SonarQubeSetting Include="sonar.coverage.exclusions">
+            <Value>**/Program.cs, **/MessageMappings.cs, **/SqsConsumerService.cs, **/Models/**, **/Queue/**, **/Handler/MemberJoinedHandler.cs, **/Handler/MemberDetailChangedHandler.cs, **/Handler/IMessageHandler.cs,</Value>
+        </SonarQubeSetting>
+    </ItemGroup>
+</Project>
